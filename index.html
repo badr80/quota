@@ -1,1 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Example</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f4f7fc;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 18px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td input, td span {
+            font-size: 18px;
+            padding: 8px;
+            width: 120px;
+            text-align: center;
+        }
+
+        td input {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        td input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .input-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        label {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        div {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            font-size: 18px;
+            padding: 10px;
+            width: 160px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        .result-label {
+            margin-left: 10px;
+            font-size: 18px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            th, td {
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            td input, td span {
+                width: 100px;
+                font-size: 16px;
+            }
+
+            label, .result-label {
+                font-size: 16px;
+            }
+
+            input[type="text"], .input-box input {
+                width: 120px;
+                font-size: 16px;
+            }
+
+            .input-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .input-box label {
+                margin-bottom: 8px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+
+        /* Smaller devices (portrait mobile) */
+        @media (max-width: 480px) {
+            th, td {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            td input, td span {
+                width: 80px;
+                font-size: 14px;
+            }
+
+            label, .result-label {
+                font-size: 14px;
+            }
+
+            input[type="text"], .input-box input {
+                width: 100px;
+                font-size: 14px;
+            }
+
+            .input-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .input-box label {
+                margin-bottom: 5px;
+            }
+
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Data Table with Labels for Analysis, Input Fields for W/Count, %, and Calculated Results -->
+    <table>
+        <thead>
+            <tr>
+                <th>Analysis</th>
+                <th>W/Count</th>
+                <th>%</th>
+                <th>RESULT</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Rep Row -->
+            <tr>
+                <td><label>Rep</label></td>
+                <td><input type="number" class="wCountInput" value="30" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="30" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+
+            <!-- Data Rows -->
+            <tr>
+                <td><label>101</label></td>
+                <td><input type="number" class="wCountInput" value="101" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="30" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+            <tr>
+                <td><label>100</label></td>
+                <td><input type="number" class="wCountInput" value="100" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="30" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+            <tr>
+                <td><label>95-99%</label></td>
+                <td><input type="number" class="wCountInput" value="95" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="60" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+            <tr>
+                <td><label>85-94%</label></td>
+                <td><input type="number" class="wCountInput" value="85" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="60" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+            <tr>
+                <td><label>75-84%</label></td>
+                <td><input type="number" class="wCountInput" value="75" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="60" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+            <tr>
+                <td><label>50-74%</label></td>
+                <td><input type="number" class="wCountInput" value="50" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="100" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+            <tr>
+                <td><label>0</label></td>
+                <td><input type="number" class="wCountInput" value="0" oninput="calculateRowResult(this)"></td>
+                <td><input type="number" class="percentInput" value="100" oninput="calculateRowResult(this)"></td>
+                <td><span class="rowResult">0</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Before and After Row for Sum Calculation -->
+    <div class="input-box">
+        <label>Before: </label>
+        <input type="text" id="beforeSum" readonly>
+        <label class="result-label">After: </label>
+        <input type="text" id="afterSum" readonly>
+    </div>
+
+    <!-- Q 4000 Calculations -->
+    <div class="input-box">
+        <label>Q 4000 (Formula 1): </label>
+        <input type="text" id="q4000_1" readonly>
+    </div>
+    <div class="input-box">
+        <label>Q 3500 (Formula 2): </label>
+        <input type="text" id="q3500_1" readonly>
+    </div>
+
+    <script>
+        let qbefore = 0;
+        let qafter = 0;
+        let Q4000, Q3500;
+
+        function calculateRowResult(inputElement) {
+            const row = inputElement.closest('tr');
+            const wCount = parseFloat(row.querySelector('.wCountInput').value) || 0;
+            const percent = parseFloat(row.querySelector('.percentInput').value) || 0;
+            const result = (wCount * percent) / 100;
+            row.querySelector('.rowResult').textContent = result.toFixed(2);
+            updateSums();
+        }
+
+        function updateSums() {
+            let totalWCount = 0;
+            let totalResult = 0;
+            const wCountInputs = document.querySelectorAll('.wCountInput');
+            const rowResults = document.querySelectorAll('.rowResult');
+
+            wCountInputs.forEach(input => {
+                totalWCount += parseFloat(input.value) || 0;
+            });
+
+            rowResults.forEach(result => {
+                totalResult += parseFloat(result.textContent) || 0;
+            });
+
+            // Save the sums in variables qbefore and qafter
+            qbefore = totalWCount;
+            qafter = totalResult;
+
+            // Update the sum fields
+            document.getElementById('beforeSum').value = totalWCount.toFixed(2);
+            document.getElementById('afterSum').value = totalResult.toFixed(2);
+
+            // Calculate and display the Q 4000 and Q 3500 formulas
+            calculateQ4000();
+        }
+
+        function calculateQ4000() {
+            // Formula 1: (qafter / 250) * 30 / 1440
+            Q4000 = (qafter / 250) * 30 / 1440;
+            // Formula 2: (qafter / 218.75) * 30 / 1440
+            Q3500 = (qafter / 218.75) * 30 / 1440;
+
+            // Now calculate the time in hours and minutes
+            document.getElementById('q4000_1').value = convertToTime(Q4000);
+            document.getElementById('q3500_1').value = convertToTime(Q3500);
+        }
+
+        function convertToTime(value) {
+            // Multiply by 24 to get total hours from fraction of a day
+            let totalHours = value * 24;
+
+            // Extract the integer part for hours
+            const hours = Math.floor(totalHours);
+
+            // Extract the decimal part and convert it to minutes
+            const minutes = Math.round((totalHours - hours) * 60);
+
+            // Format the result as h:mm
+            return `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+        }
+
+        // Initial sum update
+        updateSums();
+    </script>
+</body>
+</html>
 
